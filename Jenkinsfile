@@ -3,7 +3,7 @@ pipeline {
 
     environment {
 
-        RELEASE'1.0'
+        RELEASE='1.0'
     }
 
     stages {
