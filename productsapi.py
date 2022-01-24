@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 
 # http://localhost:3000/api/products
-@app.route('/api/v1/products')  # this is decorator
+@app.route('/api/products')  # this is decorator
 def productList():
     return jsonify(products)
 
