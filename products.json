@@ -1,0 +1,17 @@
+[
+  {
+    "productId": "A1234",
+    "productName": "Iphone12",
+    "price": 5645.5
+  },
+  {
+    "productId": "V1234",
+    "productName": "Oneplus",
+    "price": 46453.2
+  },
+  {
+    "productId": "S1234",
+    "productName": "SamsungFlip",
+    "price": 126453.2
+  }
+]
