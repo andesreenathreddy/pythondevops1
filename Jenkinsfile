@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        VALUE= 'Dev'
-        VERSION='1.0'
+
+        RELEASE'1.0'
     }
 
     stages {
