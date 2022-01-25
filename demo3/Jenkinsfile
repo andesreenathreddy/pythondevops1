@@ -1,0 +1,92 @@
+pipeline {
+agent any
+
+stages {
+stage('Verify Branch') {
+steps {
+echo "$GIT_BRANCH"
+}
+}
+
+stage('Start test app') {
+steps {
+echo "Starting To test"
+}
+post {
+success {
+echo "App started successfully :)"
+}
+failure {
+echo "App failed to start :("
+}
+}
+}
+stage('Run Tests') {
+steps {
+echo "Run test1"
+}
+}
+stage('Stop test app') {
+steps {
+echo "Stop test App"
+}
+}
+stage('Container Scanning') {
+parallel {
+stage('Run ') {
+steps {
+echo "Run"
+}
+}
+stage('Run Trivy') {
+steps {
+sleep(time: 30, unit: 'SECONDS')
+// pwsh(script: """
+// C:\\Windows\\System32\\wsl.exe -- sudo trivy blackdentech/jenkins-course
+// """)
+}
+}
+}
+}
+stage('Deploy to QA') {
+environment {
+ENVIRONMENT = 'qa'
+}
+steps {
+echo "Deploying to ${ENVIRONMENT}"
+
+}
+}
+stage('Approve PROD Deploy') {
+when {
+branch 'master'
+}
+options {
+timeout(time: 1, unit: 'HOURS')
+}
+steps {
+input message: "Deploy?"
+}
+post {
+success {
+echo "Production Deploy Approved"
+}
+aborted {
+echo "Production Deploy Denied"
+}
+}
+}
+stage('Deploy to PROD') {
+when {
+branch 'master'
+}
+environment {
+ENVIRONMENT = 'prod'
+}
+steps {
+echo "Deploying to ${ENVIRONMENT}"
+
+}
+}
+}
+}
